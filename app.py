@@ -26,10 +26,15 @@ DB_PATH = Path(os.getenv("RADAR_DB_PATH", str(BASE_DIR / "radar.db"))).resolve()
 load_dotenv(BASE_DIR / ".env")
 
 def load_flask_secret() -> str:
-    """Persist a local session secret so logins survive server restarts."""
+    """Load a stable secret from the environment; use a local file only in development."""
     configured = os.getenv("FLASK_SECRET_KEY", "").strip()
     if configured:
         return configured
+
+    # Railway containers should not depend on writing secrets into the app directory.
+    if os.getenv("RAILWAY_ENVIRONMENT") or os.getenv("PORT"):
+        return secrets.token_hex(32)
+
     secret_path = BASE_DIR / ".flask_secret"
     if secret_path.exists():
         value = secret_path.read_text(encoding="utf-8").strip()
