@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#11151d" />
+  <meta name="description" content="Descubra livros, músicas, séries, filmes, jogos, mangás e HQs para sua próxima paixão cultural." />
+  <title>Radar — descubra algo novo</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="Radar, página inicial">
+      <span class="brand-mark" aria-hidden="true">r.</span>
+      <span>radar<span class="brand-period">.</span></span>
+    </a>
+
+    <nav class="main-nav" aria-label="Navegação principal">
+      <a class="nav-link active" href="#explorar">Explorar</a>
+      <a class="nav-link" href="#categorias">Categorias</a>
+      <button class="nav-link nav-favorites" id="showFavorites" type="button">Minha lista <span id="favoriteCount" class="nav-count">0</span></button>
+    </nav>
+
+    <div class="header-actions">
+      <button class="account-button" id="accountButton" type="button">Entrar / criar conta</button>
+      <a class="header-cta" href="#explorar">Encontrar meu próximo favorito <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> SEU RADAR CULTURAL</div>
+        <h1>O que combina<br />com o seu <em>momento?</em></h1>
+        <p class="hero-description">Um livro para virar a noite, uma música para repetir no caminho ou aquele jogo que vai prender sua atenção. Tem sempre algo novo para descobrir.</p>
+
+        <form class="search-box" id="searchForm" role="search">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <label class="sr-only" for="searchInput">Busque por título, artista, gênero ou palavra-chave</label>
+          <input id="searchInput" type="search" placeholder="Busque por título, artista, gênero..." autocomplete="off" />
+          <button type="submit" aria-label="Pesquisar">Buscar <span aria-hidden="true">→</span></button>
+        </form>
+        <div class="hero-hint"><span>↳</span> Ou deixe o Radar escolher por você.</div>
+      </div>
+
+      <div class="hero-art" aria-label="Colagem ilustrativa de recomendações culturais">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="orbit-center"><span>✳</span></div>
+        <div class="floating-card floating-book">
+          <span class="floating-label">PARA LER</span>
+          <span class="floating-symbol">▤</span>
+          <strong>Novos<br />mundos.</strong>
+        </div>
+        <div class="floating-card floating-music">
+          <span class="floating-label">PARA OUVIR</span>
+          <span class="music-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          <strong>Uma nova<br />trilha.</strong>
+        </div>
+        <div class="floating-card floating-game">
+          <span class="floating-label">PARA JOGAR</span>
+          <span class="floating-symbol">✣</span>
+          <strong>Outra<br />aventura.</strong>
+        </div>
+        <span class="art-spark spark-one">✳</span>
+        <span class="art-spark spark-two">✦</span>
+        <span class="art-caption">CURIOSIDADE É O PONTO DE PARTIDA.</span>
+      </div>
+    </section>
+
+    <section class="discovery-strip" aria-label="Destaques do Radar">
+      <div><strong>07</strong><span>universos para explorar</span></div>
+      <div><strong>∞</strong><span>possibilidades de descobrir</span></div>
+      <div class="strip-note"><span class="strip-line"></span> SEU PRÓXIMO FAVORITO ESTÁ AQUI</div>
+    </section>
+
+    <section class="personalized-section" id="personalizedSection" hidden>
+      <div class="personalized-heading">
+        <div>
+          <div class="eyebrow section-eyebrow">SEU RADAR APRENDE COM VOCÊ</div>
+          <h2>Descobertas para <em>você.</em></h2>
+          <p id="personalizedMessage">Recomendações com base nas suas avaliações, favoritos e preferências.</p>
+        </div>
+        <span class="personalized-status" id="personalizedStatus">Perfil de interesses</span>
+      </div>
+      <div class="recommendation-grid personalized-grid" id="personalizedGrid"></div>
+    </section>
+
+    <section class="explore-section" id="explorar">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow section-eyebrow">CURADORIA PARA VOCÊ</div>
+          <h2>Explore o seu próximo <em>vício.</em></h2>
+          <p>Escolha uma categoria ou navegue pelas bibliotecas conectadas às APIs.</p>
+        </div>
+        <button class="surprise-button" id="surpriseButton" type="button"><span aria-hidden="true">✳</span> Surpreenda-me</button>
+      </div>
+
+      <div class="category-bar" id="categorias" role="group" aria-label="Filtrar por categoria">
+        <button class="category-chip selected" type="button" data-category="Todos" aria-pressed="true"><span>✳</span> Tudo</button>
+        <button class="category-chip" type="button" data-category="Livros" aria-pressed="false"><span>▤</span> Livros</button>
+        <button class="category-chip" type="button" data-category="Músicas" aria-pressed="false"><span>♫</span> Músicas</button>
+        <button class="category-chip" type="button" data-category="Séries" aria-pressed="false"><span>▣</span> Séries</button>
+        <button class="category-chip" type="button" data-category="Filmes" aria-pressed="false"><span>▰</span> Filmes</button>
+        <button class="category-chip" type="button" data-category="Jogos" aria-pressed="false"><span>✣</span> Jogos</button>
+        <button class="category-chip" type="button" data-category="Mangás" aria-pressed="false"><span>漫</span> Mangás</button>
+        <button class="category-chip" type="button" data-category="HQs" aria-pressed="false"><span>▧</span> HQs</button>
+      </div>
+
+      <div class="results-toolbar">
+        <p id="resultsLabel" aria-live="polite">Carregando catálogos das APIs...</p>
+        <button class="clear-button" id="clearFilters" type="button">Limpar filtros <span aria-hidden="true">↗</span></button>
+      </div>
+      <p class="api-status" id="apiStatus" role="status" aria-live="polite" hidden></p>
+      <div class="api-retry-wrap"><button class="api-retry-button" id="retryApisButton" type="button" hidden>Tentar novamente</button></div>
+
+      <div class="recommendation-grid" id="recommendationGrid" aria-live="polite"></div>
+      <div class="load-more-wrap"><button class="load-more-button" id="loadMoreButton" type="button" hidden>Carregar mais resultados</button></div>
+      <p class="pagination-status" id="paginationStatus" role="status" aria-live="polite" hidden></p>
+      <div class="empty-state" id="emptyState" hidden>
+        <span class="empty-icon">⌕</span>
+        <h3>Carregando as bibliotecas...</h3>
+        <p>Estamos buscando títulos e capas diretamente nas APIs.</p>
+        <button class="text-button" id="resetSearch" type="button">Ver todas as recomendações →</button>
+      </div>
+    </section>
+
+    <section class="closing-banner">
+      <div class="closing-symbol" aria-hidden="true">✳</div>
+      <div>
+        <div class="eyebrow">NÃO SABE POR ONDE COMEÇAR?</div>
+        <h2>Deixe a curiosidade<br />tomar a frente.</h2>
+      </div>
+      <button id="bottomSurprise" type="button">Escolher por mim <span aria-hidden="true">↗</span></button>
+    </section>
+  </main>
+
+  <section class="api-credits" aria-label="Créditos das fontes de dados">
+    <p>Dados e imagens: <a href="https://books.google.com/" target="_blank" rel="noopener noreferrer">Google Books</a> ·
+      <a href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer">TMDB</a> ·
+      <a href="https://rawg.io/" target="_blank" rel="noopener noreferrer">RAWG</a> ·
+      <a href="https://anilist.co/" target="_blank" rel="noopener noreferrer">AniList</a> ·
+      <a href="https://www.last.fm/" target="_blank" rel="noopener noreferrer">Last.fm</a> ·
+      <a href="https://comicvine.gamespot.com/" target="_blank" rel="noopener noreferrer">Comic Vine</a>.
+    </p>
+    <p>This product uses the TMDB API but is not endorsed or certified by TMDB. Consulte os <a href="https://www.themoviedb.org/about/logos-attribution" target="_blank" rel="noopener noreferrer">logos oficiais e regras de atribuição do TMDB</a>.</p>
+    <p><a href="https://www.last.fm/resources/" target="_blank" rel="noopener noreferrer">Powered by AudioScrobbler (Last.fm — recursos de marca)</a> · <a href="https://comicvine.gamespot.com/" target="_blank" rel="noopener noreferrer">Dados de quadrinhos: Comic Vine</a>.</p>
+    <p>Projeto de demonstração. Consulte os termos de cada provedor antes de publicar ou utilizar comercialmente.</p>
+  </section>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="#inicio"><span class="brand-mark" aria-hidden="true">r.</span><span>radar<span class="brand-period">.</span></span></a>
+    <p>Feito para quem nunca fica sem assunto.</p>
+    <span class="footer-credit">RADAR CULTURAL · FRONT + BACK-END</span>
+  </footer>
+
+  <dialog class="auth-dialog" id="authDialog" aria-labelledby="authTitle">
+    <button class="dialog-close auth-close" id="closeAuthDialog" type="button" aria-label="Fechar">×</button>
+    <div class="auth-content">
+      <div class="eyebrow section-eyebrow">CONTA RADAR</div>
+      <h2 id="authTitle">Entre para personalizar seu Radar.</h2>
+      <p class="auth-intro">Suas avaliações, favoritos e preferências ajudam a selecionar conteúdos mais relevantes.</p>
+      <div id="authFormPanel">
+        <div class="auth-tabs">
+          <button type="button" class="auth-tab active" data-auth-mode="login">Entrar</button>
+          <button type="button" class="auth-tab" data-auth-mode="register">Criar conta</button>
+        </div>
+        <form id="authForm" class="auth-form">
+          <label for="authUsername">Nome de usuário</label>
+          <input id="authUsername" name="username" type="text" minlength="3" maxlength="24" autocomplete="username" required placeholder="Ex.: joao_vitor">
+          <label for="authPassword">Senha</label>
+          <input id="authPassword" name="password" type="password" minlength="8" maxlength="128" autocomplete="current-password" required placeholder="Mínimo de 8 caracteres">
+          <button type="submit" id="authSubmitButton">Entrar</button>
+          <p class="auth-message" id="authMessage" aria-live="polite"></p>
+        </form>
+      </div>
+      <section id="accountPanel" hidden>
+        <p class="account-welcome" id="accountWelcome"></p>
+        <form id="preferencesForm" class="auth-form">
+          <h3>O que você gosta?</h3>
+          <p class="preference-help">Selecione categorias e escreva alguns gêneros separados por vírgula.</p>
+          <div class="preference-categories">
+            <label><input type="checkbox" name="preferredCategory" value="Livros"> Livros</label>
+            <label><input type="checkbox" name="preferredCategory" value="Músicas"> Músicas</label>
+            <label><input type="checkbox" name="preferredCategory" value="Séries"> Séries</label>
+            <label><input type="checkbox" name="preferredCategory" value="Filmes"> Filmes</label>
+            <label><input type="checkbox" name="preferredCategory" value="Jogos"> Jogos</label>
+            <label><input type="checkbox" name="preferredCategory" value="Mangás"> Mangás</label>
+            <label><input type="checkbox" name="preferredCategory" value="HQs"> HQs</label>
+          </div>
+          <label for="preferredGenres">Gêneros favoritos</label>
+          <input id="preferredGenres" name="genres" type="text" maxlength="300" placeholder="Fantasia, suspense, RPG, ficção científica">
+          <button type="submit">Salvar minhas preferências</button>
+          <p class="auth-message" id="preferencesMessage" aria-live="polite"></p>
+        </form>
+        <button class="logout-button" id="logoutButton" type="button">Sair da conta</button>
+      </section>
+    </div>
+  </dialog>
+
+  <dialog class="details-dialog" id="detailsDialog" aria-labelledby="dialogTitle">
+    <button class="dialog-close" id="closeDialog" type="button" aria-label="Fechar">×</button>
+    <div id="dialogContent"></div>
+  </dialog>
+</body>
+</html>
